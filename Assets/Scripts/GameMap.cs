@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using NUnit.Framework.Constraints;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameMap : MonoBehaviour
 {
     private string[] allInMap;
-
+    private TileVisuals tileScript;
     private int mapXSize;
     private int mapYSize;
     [SerializeField]
@@ -50,17 +52,20 @@ public class GameMap : MonoBehaviour
                         // Instantiate the land object at the correct position
                         GameObject tileObject = Instantiate(land.landObject, new Vector3(x, y, 0), Quaternion.identity);
 
+                        
+
                         // Set the parent of the tile to organize them in the scene
                         tileObject.transform.SetParent(tilesParent.transform);
 
                         // Optionally, store the position in the tile (if you need to reference it later)
-                        TileVisuals tilePosition = tileObject.AddComponent<TileVisuals>();
-                        tilePosition.x = x;
-                        tilePosition.y = y;
+
+                        tileScript = tileObject.GetComponent<TileVisuals>();
+                        tileScript.Initialize(land);
+                        tileScript.x = x;
+                        tileScript.y = y;
 
                         // Optionally, you can set the name of the tile based on its position for easy identification
                         tileObject.name = $"{land.landName} ({x}, {y})";
-
                         if(x == mapXSize){
                             x = 1;
                             y += 1;
@@ -69,6 +74,13 @@ public class GameMap : MonoBehaviour
                         }
                     }
                 }
+                foreach (Resources resources in allResources){
+                    if (parts[k] == resources.resourceNameCode)
+                    {
+                        tileScript.AddResources(resources);
+                    }
+                }
+
             }     
         }
     }

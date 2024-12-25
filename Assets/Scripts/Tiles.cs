@@ -37,15 +37,15 @@ public class Tile
         resources.Add(resource);
     }
 
-    public string GetTileNameCode()
+    public string GetTileNameAndResources()
     {
-        string name = land.landNameCode;
+        string name = "Land: " + land.landName;
 
         if (resources.Count > 0)
         {
-            var resourceCodes = resources.ConvertAll(r => r.resourceNameCode);
-            resourceCodes.Sort();
-            name += "_" + string.Join("_", resourceCodes);
+            var resource = resources.ConvertAll(r => r.resourceName);
+            resource.Sort();
+            name += " Resources: " + string.Join(", ", resource);
         }
 
         return name;
