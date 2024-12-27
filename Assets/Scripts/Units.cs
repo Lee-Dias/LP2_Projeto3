@@ -4,40 +4,37 @@ using NaughtyAttributes;
 
 public class Units : MonoBehaviour
 {
-    [SerializeField]
-    private string unitName; 
-
-    [SerializeField]
-    private List<Resources> resourcesToHarvest;
-
-    [SerializeField]
-    private bool canAddResources = false;
-
-    [SerializeField, ShowIf(nameof(canAddResources))]
-    private List<Resources> resourcesToGenerate;
+    private Unit unitToPay;
 
     private TileVisuals currentTile;
 
     private List<Resources> resourcesInTile;
 
-    private void ChangedTurn(){
+    private List<Resources> resourcesHarvested;
+
+    private void EachTurn(){
         currentTile = this.GetComponentInParent<TileVisuals>();
         resourcesInTile = currentTile.GetResources();
     }
 
-    private void unitHarvest(){
+    private void UnitHarvest(){
         foreach(Resources resource in resourcesInTile){
-            foreach(Resources resourceHarvest in resourcesToHarvest){
+            foreach(Resources resourceHarvest in unitToPay.ResourcesToHarvest){
                 if(resource == resourceHarvest){
                     currentTile.RemoveResources(resourceHarvest);
+                    resourcesHarvested.Add(resourceHarvest);
                 }
             }
-        }
-        if (canAddResources == true){
-            foreach (Resources resource in resourcesToGenerate){
+            }
+        if (unitToPay.CanAddResources == true){
+            foreach (Resources resource in unitToPay.ResourcesToGenerate){
                 currentTile.AddResources(resource);
             }
         }
+    }
+    private void MoveUnit(Tile destination){
+
+
     }
 
 }

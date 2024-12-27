@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4ef370ab11b424385e22ae1f0f9385, type: 3}
+  m_Name: Miner
+  m_EditorClassIdentifier: 
+  unitName: Miner
+  unitNameCode: miner
+  resourcesToHarvest:
+  - {fileID: 11400000, guid: 32f5ad1f6661ddc4d96bdd531215d02b, type: 2}
+  canAddResources: 1
+  resourcesToGenerate:
+  - {fileID: 11400000, guid: a237a779cae623846bdb47989f0f667d, type: 2}
+  movement: 1
+  unitImage: {fileID: 4423684556880446552, guid: 902ab7c44991a0d4dbb5f00e8aed30ef, type: 3}
