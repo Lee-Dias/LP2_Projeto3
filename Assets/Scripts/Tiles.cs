@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Tile
 {
-    public Lands land;
-    public List<Resources> resources;
+    private Lands land;
+    public List<Resources> resources{get; private set;}
 
     public Tile(Lands land)
     {
@@ -32,9 +32,19 @@ public class Tile
         return totalFood;
     }
 
-    public void AddResource(Resources resource)
+    public void AddResource(Resources resourceToAdd)
     {
-        resources.Add(resource);
+        foreach(Resources resource in resources){
+            if(resourceToAdd == resource){
+                return;
+            }
+        }
+        resources.Add(resourceToAdd);
+    }
+
+    public void RemoveResource(Resources resourceToRemove)
+    {
+        resources.Remove(resourceToRemove);
     }
 
     public string GetTileNameAndResources()
