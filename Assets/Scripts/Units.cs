@@ -13,7 +13,7 @@ public class Units : MonoBehaviour
     //Variable for the resources in the tile that the unit is in
     private List<Resources> resourcesInTile;
     //Variable for the resources that the unit has harvested
-    private List<Resources> resourcesHarvested = new List<Resources> { };
+    public List<Resources> resourcesHarvested {get; private set;} = new List<Resources>();
     //Variable for the UnitSelectManager
     private UnitSelectManager unitSelectManager;
     // For visual feedback on the blink
@@ -192,8 +192,11 @@ public class Units : MonoBehaviour
 
     private IEnumerator BlinkEffect()
     {
+        //checks if the tile is supposed to be blinking
         isBlinking = true;
-        float blinkSpeed = 1f; // Adjust speed (lower = slower blink)
+        // Adjust blinking speed
+        float blinkSpeed = 2f; 
+
 
         while (isBlinking)
         {

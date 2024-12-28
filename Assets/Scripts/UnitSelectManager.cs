@@ -1,14 +1,19 @@
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class UnitSelectManager : MonoBehaviour
 {
-    public bool isMoving{get; private set;} = false ;
     
     public List<Units> selectedUnits {get; private set;} = new List<Units>() ; // List of selected units
 
     [SerializeField]
     private TIlesChecker tilesChecker;
+    [SerializeField]
+    private TileSelectManager tileSelected;
+    [SerializeField]
+    private TextMeshProUGUI errorText;
 
     public void SelectUnit(Units unit)
     {
@@ -27,19 +32,22 @@ public class UnitSelectManager : MonoBehaviour
             unit.OnDeselected(); // Call the unit's deselection logic
         }
     }
-    public void Moves(){
-        isMoving = !isMoving;
-    }
 
-    public void MoveAllUnits(TileInfo tile)
+    public void MoveAllUnits()
     {
-        foreach (Units unit in selectedUnits)
-        {
-            unit.MoveUnit(tile); // Deselect each unit
-            unit.EachMove();
-            tilesChecker.checkchilds();
-            isMoving = false;
+        TileInfo tile = tileSelected.selectedTile;
+        if (tile != null){
+            errorText.text = "";
+            foreach (Units unit in selectedUnits)
+            {
+                unit.MoveUnit(tile); 
+                unit.EachMove();
+                tilesChecker.checkchilds();
+            }
+        }else{
+            errorText.text = "Please Select A tile";
         }
+
     }
 
     public void DeselectAllUnits()
