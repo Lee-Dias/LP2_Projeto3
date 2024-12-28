@@ -8,7 +8,7 @@ using UnityEngine;
 public class GameMap : MonoBehaviour
 {
     private string[] allInMap;
-    private TileVisuals tileScript;
+    private TileInfo tileScript;
     private int mapXSize;
     private int mapYSize;
     [SerializeField]
@@ -59,7 +59,7 @@ public class GameMap : MonoBehaviour
 
                         // Optionally, store the position in the tile (if you need to reference it later)
 
-                        tileScript = tileObject.GetComponent<TileVisuals>();
+                        tileScript = tileObject.GetComponent<TileInfo>();
                         tileScript.Initialize(land);
                         tileScript.x = x;
                         tileScript.y = y;

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class GenerateUnits : MonoBehaviour
@@ -22,6 +23,8 @@ public class GenerateUnits : MonoBehaviour
                         Unitobject.transform.SetParent(child.transform, false);
                         //Unitobject.transform.position = new Vector3(0, 0, 0.7f);
                         isRunning = false;
+                        Units unitScript = Unitobject.GetComponent<Units>();
+                        unitScript.unitToPlay = unit;   
                     }
                 }
             }

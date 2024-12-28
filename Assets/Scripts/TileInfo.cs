@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TileVisuals : MonoBehaviour
+public class TileInfo : MonoBehaviour
 {
     private Tile tile; // The logical data for this tile
 
     public int x;
     public int y;  
+
+    public bool hasChild{get; private set;} = false;
 
     /// <summary>
     /// Initializes the TileVisuals with terrain and resources.
@@ -19,6 +21,14 @@ public class TileVisuals : MonoBehaviour
         // Create the Tile object
         tile = new Tile(land);
     }
+    public void checkChild(){
+        if(this.transform.childCount > 0 ){
+            hasChild = true;
+        }else{
+            hasChild = false;
+        }
+    }
+    
 
     public List<Resources> GetResources(){
         return tile.resources;
@@ -27,6 +37,7 @@ public class TileVisuals : MonoBehaviour
     public void AddResources(Resources resources){
         tile.AddResource(resources);
     }
+
     public void RemoveResources(Resources resources){
         tile.RemoveResource(resources);
     }
@@ -58,7 +69,12 @@ public class TileVisuals : MonoBehaviour
     }
 
     private void OnMouseDown(){
-        Debug.Log($"{GetTileNameAndResources()} coins: {GetTotalCoins()} food: {GetTotalFood()} ");
+        UnitSelectManager unitSelectManager = FindFirstObjectByType<UnitSelectManager>();
+        if (unitSelectManager.isMoving == true){
+            unitSelectManager.MoveAllUnits(this);
+        }else{
+            Debug.Log($"{tile.GetTileNameAndResources()} Coins: {GetTotalCoins()} Food: {GetTotalFood()}");
+        }
 
     }
 }
