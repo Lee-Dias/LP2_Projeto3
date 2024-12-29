@@ -40,61 +40,64 @@ e fez se verificações a partir de tudo existente e que pode vir a existir e n�
 
 
 ### Diagrama Uml
-
+```mermaid
 ---
-title: GameMap and Unit System
+title: Game
 ---
 classDiagram
-    note "GameMap and Unit System"
+    note "Game"
+    Start --> GameMap
+    Start --> CameraController
     GameMap <|-- TileInfo
     GameMap <|-- CameraController
     TileInfo <|-- Tile
     TileInfo <|-- Resources
     TileInfo <|-- Lands
     UnitSelectManager <|-- Units
+    UnitSelectManager <|-- Unit
     TileSelectManager <|-- TileInfo
     Units <|-- TileInfo
     Units <|-- Resources
+    Unit --> Resources
+    TIlesChecker --> TileInfo
+    GenerateUnits --> Units
+    GenerateUnits --> TileInfo
+    UiManager --> UnitSelectManager
+    UiManager --> Resources
+    UiManager --> TileInfo
+    UiManager --> Units
+    UiManager --> GameMap
 
+    class Start {
+        +StartGame()
+        +OpenExplorer()
+    }
     class GameMap {
-        +int mapXSize
-        +int mapYSize
         +GenerateMap(mapInfo)
         +GameStart(mapPath)
     }
     class TileInfo {
-        +Tile tile
-        +List<Resources> resources
         +Initialize(Lands land)
         +AddResources(Resources resources)
         +RemoveResources(Resources resources)
         +GetTotalCoins()
         +GetTotalFood()
         +GetTileNameAndResources()
+        +checkChild()
     }
     class Tile {
-        +int baseCoin
-        +int baseFood
-        +List<Resources> resources
         +CalculateCoins()
         +CalculateFood()
         +AddResource(Resources resourceToAdd)
         +RemoveResource(Resources resourceToRemove)
     }
     class Resources {
-        +string resourceName
-        +string resourceNameCode
-        +int coinModifier
-        +int foodModifier
+        +coinModifier()
+        +foodModifier()
     }
     class Lands {
-        +string landName
-        +string landNameCode
-        +int baseCoin
-        +int baseFood
     }
     class UnitSelectManager {
-        +List<Units> selectedUnits
         +SelectUnit(Units unit)
         +DeselectUnit(Units unit)
         +MoveAllUnits()
@@ -104,32 +107,37 @@ classDiagram
         +GetSelectedUnits()
     }
     class TileSelectManager {
-        +TileInfo selectedTile
         +SelectTile(TileInfo tile)
         +DeselectTile()
     }
     class Units {
-        +string unitName
-        +string unitNameCode
-        +List<Resources> resourcesToHarvest
-        +bool canAddResources
-        +List<Resources> resourcesToGenerate
-        +move movement
-        +GameObject unitImage
         +OnSelected()
         +OnDeselected()
         +MoveUnit(TileInfo tile)
         +UnitRemoveSelf()
         +UnitHarvest()
     }
+    class Unit {
+        +ResourcesToHarvest
+        +ResourcesToGenerate
+        +UnitImage
+        +Movement
+    }
     class CameraController {
-        +float moveSpeed
-        +float zoomSpeed
-        +float minZoom
-        +float maxZoom
-        +Vector3 dragOrigin
-        +Camera cam
         +HandleZoom()
         +HandleRightClickDrag()
         +CameraPosition()
     }
+    class TIlesChecker {
+        +checkchilds()
+    }
+    class GenerateUnits {
+        +PlaceUnit(Unit unit)
+    }
+    class UiManager {
+        +Play()
+        +UnitInfoSlected()
+        +checkAllResourcesToGet()
+        +UnitsSelected()
+    }
+
