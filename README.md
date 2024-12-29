@@ -42,10 +42,10 @@ e fez se verificações a partir de tudo existente e que pode vir a existir e n�
 ### Diagrama Uml
 ```mermaid
 ---
-title: Game
+title: Lp2 Project 3
 ---
 classDiagram
-    note "Game"
+    note "Lp2 Project 3"
     Start --> GameMap
     Start --> CameraController
     GameMap <|-- TileInfo
