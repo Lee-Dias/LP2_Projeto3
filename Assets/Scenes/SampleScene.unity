@@ -985,7 +985,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 971069590}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameInfo, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
@@ -2141,6 +2141,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2190,8 +2191,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2222,6 +2223,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 180}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e35575bebf19f4b8450a77f45c75e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameMap: {fileID: 971069588}
+  moveSpeed: 1
+  zoomSpeed: 1
+  minZoom: 5
+  maxZoom: 50
+  dragOrigin: {x: 0, y: 0, z: 0}
 --- !u!1 &971069587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,7 +2251,6 @@ GameObject:
   m_Component:
   - component: {fileID: 971069589}
   - component: {fileID: 971069588}
-  - component: {fileID: 971069590}
   - component: {fileID: 971069591}
   - component: {fileID: 971069592}
   - component: {fileID: 971069593}
@@ -2271,6 +2289,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2b63987f3ca63a44eb1e26a585e6d81a, type: 2}
   - {fileID: 11400000, guid: 5ef392afb8ba8684c9541cbb532318c2, type: 2}
   tilesParent: {fileID: 1166501375}
+  error: {fileID: 651594293}
 --- !u!4 &971069589
 Transform:
   m_ObjectHideFlags: 0
@@ -2286,28 +2305,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &971069590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971069587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14de4aaec682d394bb2b3469f7daf479, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allUniqueResources:
-  - {fileID: 11400000, guid: a85d6a0865bf2164e8d6abf6078f2bc7, type: 2}
-  - {fileID: 11400000, guid: cd99806947b7a9f40a7f9f0c423bd7cf, type: 2}
-  - {fileID: 11400000, guid: 8e754dec664ac024ea182e8333259f4d, type: 2}
-  - {fileID: 11400000, guid: 32f5ad1f6661ddc4d96bdd531215d02b, type: 2}
-  - {fileID: 11400000, guid: def2ddd16335d8c49aae09b3208d3058, type: 2}
-  - {fileID: 11400000, guid: a237a779cae623846bdb47989f0f667d, type: 2}
-  turn: {fileID: 1351031172}
-  showResources: {fileID: 1671851455}
-  parentOfTiles: {fileID: 1166501375}
 --- !u!114 &971069591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2361,9 +2358,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34141e2108f4ed5408c71e0abcc6b8fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turn: {fileID: 1351031172}
+  showResources: {fileID: 1671851455}
+  parentOfTiles: {fileID: 1166501375}
   Selected: {fileID: 1563513870}
   unitSelectManager: {fileID: 971069592}
-  unitsArea: {fileID: 1512375144}
+  unitsSelected: {fileID: 1512375144}
   allUniqueResources:
   - {fileID: 11400000, guid: a85d6a0865bf2164e8d6abf6078f2bc7, type: 2}
   - {fileID: 11400000, guid: cd99806947b7a9f40a7f9f0c423bd7cf, type: 2}
@@ -2437,6 +2437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMapFile: {fileID: 971069588}
+  cameraScript: {fileID: 963194229}
 --- !u!114 &1044077704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2650,8 +2651,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 971069590}
-        m_TargetAssemblyTypeName: GameInfo, Assembly-CSharp
+      - m_Target: {fileID: 971069594}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -3806,8 +3807,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 971069590}
-        m_TargetAssemblyTypeName: GameInfo, Assembly-CSharp
+      - m_Target: {fileID: 971069594}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
