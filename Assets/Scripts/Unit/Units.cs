@@ -22,11 +22,14 @@ public class Units : MonoBehaviour
     // Stores the original color of the unit
     private Color originalColor; 
     // Tracks whether the unit is blinking
+    private GameObject parentOfTiles; 
+    // Tracks whether the unit is blinking
     private bool isBlinking = false; 
 
     // Does this code at when the script is created in the gameobject
     void Start()
     {
+        parentOfTiles = GameObject.Find("TilesParent");
         //sets the variable unitRenderer to the renderer that the object
         unitRenderer = GetComponent<Renderer>();
         //gets the renderers original color
@@ -245,8 +248,9 @@ public class Units : MonoBehaviour
     private TileInfo FindTileInfoAt(Vector3 position)
     {
     // Loop through all tiles to find the one matching the position
-    foreach (TileInfo tileVisual in FindObjectsOfType<TileInfo>())
+    foreach (Transform child in parentOfTiles.transform)
     {
+        TileInfo tileVisual = child.GetComponent<TileInfo>();
         if (tileVisual.x == (int)position.x && tileVisual.y == (int)position.y)
         {
             return tileVisual;
