@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Resources", menuName = "Scriptable Objects/Resources")]
-public class Resources : ScriptableObject
+[CreateAssetMenu(fileName = "ResourcesGame", menuName = "Scriptable Objects/ResourcesGame")]
+public class ResourcesGame : ScriptableObject
 {
     // Name of the resource
     public string resourceName;

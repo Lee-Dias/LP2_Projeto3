@@ -18,7 +18,7 @@ public class GameMap : MonoBehaviour
     public int mapYSize{get; private set;}
     // List to store all resource types available in the game
     [SerializeField]
-    private List<Resources> allResources;
+    private List<ResourcesGame> allResources;
     // List to store all land types available in the game
     [SerializeField]
     private List<Lands> allLands;
@@ -125,7 +125,7 @@ public class GameMap : MonoBehaviour
                 }
 
                 // Loop through all resources to see if the part matches any resource code
-                foreach (Resources resources in allResources)
+                foreach (ResourcesGame resources in allResources)
                 {
                     // Check if the current part matches the resource's name code
                     if (parts[k] == resources.resourceNameCode)

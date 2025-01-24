@@ -11,10 +11,10 @@ public class Units : MonoBehaviour
     public Unit unitToPlay;
     //Variable for currenttile that the unit is in
     private TileInfo currentTile;
-    //Variable for the resources in the tile that the unit is in
-    private List<Resources> resourcesInTile;
-    //Variable for the resources that the unit has harvested
-    public List<Resources> resourcesHarvested {get; private set;} = new List<Resources>();
+    //Variable for the ResourcesGame in the tile that the unit is in
+    private List<ResourcesGame> ResourcesGameInTile;
+    //Variable for the ResourcesGame that the unit has harvested
+    public List<ResourcesGame> ResourcesGameHarvested {get; private set;} = new List<ResourcesGame>();
     //Variable for the UnitSelectManager
     private UnitSelectManager unitSelectManager;
     // For visual feedback on the blink
@@ -42,8 +42,8 @@ public class Units : MonoBehaviour
     public void EachMove(){
         //gets the parent of the object
         currentTile = this.GetComponentInParent<TileInfo>();
-        //gets the resources of the parent
-        resourcesInTile = currentTile.GetResources();
+        //gets the ResourcesGame of the parent
+        ResourcesGameInTile = currentTile.GetResources();
     }
     //checks if the player left clicks the mouse
     private void OnMouseDown()
@@ -84,46 +84,46 @@ public class Units : MonoBehaviour
         }
     }
 
-    // Method for the unit to harvest resources
+    // Method for the unit to harvest ResourcesGame
     public void UnitHarvest()
     {
-        // Check if there are resources in the current tile
-        if (resourcesInTile != null)
+        // Check if there are ResourcesGame in the current tile
+        if (ResourcesGameInTile != null)
         {
-            // Creates a list to store resources that need to be removed after harvesting
-            List<Resources> resourcesToRemove = new List<Resources>();
+            // Creates a list to store ResourcesGame that need to be removed after harvesting
+            List<ResourcesGame> ResourcesGameToRemove = new List<ResourcesGame>();
 
             // Loops through each resource in the tile
-            foreach (Resources resource in resourcesInTile)
+            foreach (ResourcesGame resource in ResourcesGameInTile)
             {
                 // Loops through each resource the unit is capable of harvesting
-                foreach (Resources resourceHarvest in unitToPlay.ResourcesToHarvest)
+                foreach (ResourcesGame resourceHarvest in unitToPlay.ResourcesToHarvest)
                 {
-                    // Check if the resource matches the unit's harvestable resources
+                    // Check if the resource matches the unit's harvestable ResourcesGame
                     if (resource == resourceHarvest)
                     {
                         // Add the resource to the removal list to process it later
-                        resourcesToRemove.Add(resourceHarvest);
+                        ResourcesGameToRemove.Add(resourceHarvest);
 
-                        // Add the resource to the list of harvested resources
-                        resourcesHarvested.Add(resourceHarvest);
+                        // Add the resource to the list of harvested ResourcesGame
+                        ResourcesGameHarvested.Add(resourceHarvest);
                     }
                 }
             }
 
-            // Check if the unit is allowed to add resources to the tile
+            // Check if the unit is allowed to add ResourcesGame to the tile
             if (unitToPlay.CanAddResources == true)
             {
-                // Loop through the resources the unit is capable of generating
-                foreach (Resources resource in unitToPlay.ResourcesToGenerate)
+                // Loop through the ResourcesGame the unit is capable of generating
+                foreach (ResourcesGame resource in unitToPlay.ResourcesToGenerate)
                 {
                     // Add the generated resource to the current tile
                     currentTile.AddResources(resource);
                 }
             }
 
-            // Process the resources that need to be removed after harvesting
-            foreach (Resources resourceToRemove in resourcesToRemove)
+            // Process the ResourcesGame that need to be removed after harvesting
+            foreach (ResourcesGame resourceToRemove in ResourcesGameToRemove)
             {
                 // Remove the resource from the current tile
                 currentTile.RemoveResources(resourceToRemove);
@@ -131,7 +131,7 @@ public class Units : MonoBehaviour
         }
         else
         {
-            // Log a message if there are no resources to harvest in the current tile
+            // Log a message if there are no ResourcesGame to harvest in the current tile
             Debug.Log("nothing to harvest here");
         }
     }

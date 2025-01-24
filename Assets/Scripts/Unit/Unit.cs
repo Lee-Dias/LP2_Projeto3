@@ -19,7 +19,7 @@ public class Unit : ScriptableObject
 
     // List of resources the unit can harvest (e.g., food, wood)
     [SerializeField]
-    private List<Resources> resourcesToHarvest;  
+    private List<ResourcesGame> resourcesToHarvest;  
 
     // Bool to determine if the unit can add resources to the game world 
     [SerializeField]
@@ -27,7 +27,7 @@ public class Unit : ScriptableObject
 
     // List of resources the unit can generate 
     [SerializeField, ShowIf(nameof(canAddResources))] 
-    private List<Resources> resourcesToGenerate;  
+    private List<ResourcesGame> resourcesToGenerate;  
 
     // Movement pattern for the unit
     [SerializeField] 
@@ -44,11 +44,11 @@ public class Unit : ScriptableObject
     // Returns the units name in the code
     public string UnitNameCode => unitNameCode;  
     // Returns the list of resources the unit can harvest
-    public List<Resources> ResourcesToHarvest => resourcesToHarvest;  
+    public List<ResourcesGame> ResourcesToHarvest => resourcesToHarvest;  
     // Returns whether the unit can generate resources
     public bool CanAddResources => canAddResources;  
     // Returns the list of resources the unit can generate
-    public List<Resources> ResourcesToGenerate => resourcesToGenerate;  
+    public List<ResourcesGame> ResourcesToGenerate => resourcesToGenerate;  
     // Returns the movement type of the unit
     public move Movement => movement;  
     // Returns the visual representation of the unit

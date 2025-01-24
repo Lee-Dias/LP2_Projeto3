@@ -54,7 +54,7 @@ public class TileInfo : MonoBehaviour
     }
 
     // Method to retrieve the list of resources present on the tile
-    public List<Resources> GetResources()
+    public List<ResourcesGame> GetResources()
     {
         // Return the list of resources stored in the tile object
         return tile.resources;
@@ -62,14 +62,14 @@ public class TileInfo : MonoBehaviour
  
 
     // Method to add resources to the tile
-    public void AddResources(Resources resources)
+    public void AddResources(ResourcesGame resources)
     {
         // Call the AddResource method on the tile to add the specified resource
         tile.AddResource(resources);
     }
 
     // Method to remove resources from the tile
-    public void RemoveResources(Resources resources)
+    public void RemoveResources(ResourcesGame resources)
     {
         // Call the RemoveResource method on the tile to remove the resource
         tile.RemoveResource(resources);

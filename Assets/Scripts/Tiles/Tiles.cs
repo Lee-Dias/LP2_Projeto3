@@ -5,7 +5,7 @@ public class Tile
 {
     private Lands land; 
     // List to store resources present on the tile
-    public List<Resources> resources { get; private set; } 
+    public List<ResourcesGame> resources { get; private set; } 
 
     // Constructor to initialize the Tile with a specific land type
     public Tile(Lands land)
@@ -13,7 +13,7 @@ public class Tile
         // Set the land type for this tile
         this.land = land; 
         // Initialize the list of resources as empty
-        this.resources = new List<Resources>(); 
+        this.resources = new List<ResourcesGame>(); 
     }
 
     // Method to calculate the total number of coins available on the tile
@@ -45,10 +45,10 @@ public class Tile
     }
 
     // Method to add a resource to the tile if it is not already present
-    public void AddResource(Resources resourceToAdd)
+    public void AddResource(ResourcesGame resourceToAdd)
     {
         // Check if the resource is already present in the resources list
-        foreach (Resources resource in resources)
+        foreach (ResourcesGame resource in resources)
         {
             if (resourceToAdd == resource)
             {
@@ -61,7 +61,7 @@ public class Tile
     }
 
     // Method to remove a resource from the tile
-    public void RemoveResource(Resources resourceToRemove)
+    public void RemoveResource(ResourcesGame resourceToRemove)
     {
         // Remove the specified resource from the resources list
         resources.Remove(resourceToRemove);
