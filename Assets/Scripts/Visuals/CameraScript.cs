@@ -13,9 +13,8 @@ public class CameraScript : MonoBehaviour
     // Zoom speed and boundaries
     [SerializeField]     
     private float zoomSpeed = 2f;   
-    [SerializeField]        
-    private float minZoom = 5f;   
-    [SerializeField]         
+       
+    private float minZoom = 2f;        
     private float maxZoom = 50f;           
 
     private Vector3 dragOrigin;  
@@ -37,7 +36,8 @@ public class CameraScript : MonoBehaviour
         //making the camera be the position created
         this.transform.position = newPos;
         //make its size so it will always fit the map
-        cam.orthographicSize = gameMap.mapXSize;
+        cam.orthographicSize = gameMap.mapXSize/2;
+        maxZoom = gameMap.mapYSize;
     }
 
     void Update()

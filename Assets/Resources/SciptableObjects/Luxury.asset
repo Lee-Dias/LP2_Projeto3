@@ -16,3 +16,4 @@ MonoBehaviour:
   resourceNameCode: luxury
   coinModifier: 4
   foodModifier: -1
+  img: {fileID: 870268189948532141, guid: 6a568e0ab973bca41ab63a3724a305e5, type: 3}

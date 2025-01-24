@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 830ce1ec724e76c43b9a3e256fd0cf85, type: 3}
-  m_Name: Animals
+  m_Name: Pollution
   m_EditorClassIdentifier: 
-  resourceName: Animals
-  resourceNameCode: animals
-  coinModifier: 1
-  foodModifier: 3
+  resourceName: Pollution
+  resourceNameCode: pollution
+  coinModifier: -3
+  foodModifier: -3
+  img: {fileID: 2271611428540823105, guid: e7f92af8c0bdfa6428e3271801deafbb, type: 3}

@@ -89,13 +89,13 @@ public class GameMap : MonoBehaviour
                 foreach (Lands land in allLands)
                 {
                     // Check if the current part matches the land's name code
-                    if (parts[k] == land.landNameCode)
+                    if (parts[k] == land.LandNameCode)
                     {
                         // Mark that we found a valid land type for this part
                         gotSomething = true;
 
                         // Instantiate the land object at the correct position (x, y)
-                        GameObject tileObject = Instantiate(land.landObject, new Vector3(x, y, 0), Quaternion.identity);
+                        GameObject tileObject = Instantiate(land.LandObject, new Vector3(x, y, 0), Quaternion.identity);
 
                         // Set the parent of the tile to organize them in the scene hierarchy
                         tileObject.transform.SetParent(tilesParent.transform);
@@ -109,7 +109,7 @@ public class GameMap : MonoBehaviour
                         tileScript.y = y;
 
                         // Optionally, set the name of the tile based on its position for easy debugging
-                        tileObject.name = $"{land.landName} ({x}, {y})";
+                        tileObject.name = $"{land.LandName} ({x}, {y})";
 
                         // Update the coordinates: if we reach the end of the row, move to the next row
                         if (x == mapXSize)
@@ -128,7 +128,7 @@ public class GameMap : MonoBehaviour
                 foreach (ResourcesGame resources in allResources)
                 {
                     // Check if the current part matches the resource's name code
-                    if (parts[k] == resources.resourceNameCode)
+                    if (parts[k] == resources.ResourceNameCode)
                     {
                         // Mark that we found a valid resource for this part
                         gotSomething = true;

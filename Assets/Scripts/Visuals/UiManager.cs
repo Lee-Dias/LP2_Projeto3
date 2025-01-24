@@ -63,7 +63,7 @@ public class UiManager : MonoBehaviour
             foreach (ResourcesGame resource in unitSelectManager.selectedUnits.First().unitToPlay.ResourcesToHarvest)
             {
                 // Add the resource name to the display
-                Selected.text += resource.resourceName;            
+                Selected.text += resource.ResourceName;            
                 // Count how many times the resource was harvested by the selected unit
                 int i = 0;
                 foreach (ResourcesGame ResourcesGame in unitSelectManager.selectedUnits.First().ResourcesGameHarvested)
@@ -91,7 +91,7 @@ public class UiManager : MonoBehaviour
                     }
                 }
                 // Display the resource count for each resource
-                Selected.text += ResourcesGame.resourceName + " x" + i + "\n";
+                Selected.text += ResourcesGame.ResourceName + " x" + i + "\n";
             }
         }
     }
@@ -127,7 +127,7 @@ public class UiManager : MonoBehaviour
                 }
             }
             // Display the count of each unique resource
-            showResourcesGame.text = showResourcesGame.text + resource.resourceName + " x" + i + "\n";
+            showResourcesGame.text = showResourcesGame.text + resource.ResourceName + " x" + i + "\n";
         }
     }
 

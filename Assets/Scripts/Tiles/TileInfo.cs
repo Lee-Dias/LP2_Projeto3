@@ -15,10 +15,6 @@ public class TileInfo : MonoBehaviour
 
     //checks if tile has child
     public bool hasChild{get; private set;} = false;
-
-    //gets the text where the tileinfo will be 
-    [SerializeField]
-    private TextMeshProUGUI tileInfo;
     // For visual feedback on the blink
     private Renderer unitRenderer; 
     // Stores the original color of the unit
@@ -65,7 +61,7 @@ public class TileInfo : MonoBehaviour
     public void AddResources(ResourcesGame resources)
     {
         // Call the AddResource method on the tile to add the specified resource
-        tile.AddResource(resources);
+        tile.AddResource(resources, this.gameObject);
     }
 
     // Method to remove resources from the tile
