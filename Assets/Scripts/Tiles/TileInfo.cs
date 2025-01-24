@@ -68,7 +68,7 @@ public class TileInfo : MonoBehaviour
     public void RemoveResources(ResourcesGame resources)
     {
         // Call the RemoveResource method on the tile to remove the resource
-        tile.RemoveResource(resources);
+        tile.RemoveResource(resources, this.gameObject);
     }
 
     // Method to calculate the total amount of coins available on the tile

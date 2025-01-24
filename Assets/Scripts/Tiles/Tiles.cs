@@ -47,16 +47,12 @@ public class Tile
     }
 
     // Method to add a resource to the tile if it is not already present
-    public void AddResource(ResourcesGame resourceToAdd, GameObject current)
-    {
-        float offsetX = -0.35f; // Horizontal spacing between resource images
-        float offsetY = -0.35f; // Vertical offset 
+    public void AddResource(ResourcesGame resourceToAdd, GameObject crr)
+    { 
         // Check if the resource is already present in the list
         // Check if the resource is already present in the resources list
-        float positionx = 0;
         foreach (ResourcesGame resource in resources)
         {
-            positionx += 0.2f;
             if (resourceToAdd == resource)
             {
                 // If the resource is already on the tile, exit the method without adding it
@@ -65,22 +61,50 @@ public class Tile
         }
         // If the resource is not already on the tile, add it to the resources list
         resources.Add(resourceToAdd);
+        MakeResourcesImages(crr);
 
-        // Instantiate the resource's GameObject
-        GameObject resourceImg = UnityEngine.Object.Instantiate(resourceToAdd.Img, new Vector3(0, 0, 0.51f), Quaternion.identity);
-        resourceImg.transform.SetParent(current.transform);
 
-        Vector3 localPosition = new Vector3(positionx + offsetX, offsetY, 1);
+    }
 
-        // Set the position relative to the tile
-        resourceImg.transform.localPosition = localPosition;
+    private void MakeResourcesImages(GameObject current) 
+    {
+        foreach (Transform child in current.transform)
+        {
+            if(child.gameObject.layer == 3)
+                UnityEngine.Object.Destroy(child.gameObject);
+        }
+        float offsetX = -0.35f; // Horizontal spacing between resource images
+        float offsetY = -0.35f; // Vertical offset
+        float positionx = 0;
+        int count = 0;
+        foreach (ResourcesGame resource in resources)
+        {
+            // Instantiate the resource's GameObject
+            GameObject resourceImg = UnityEngine.Object.Instantiate(resource.Img, new Vector3(0, 0, 0.51f), Quaternion.identity);
+            resourceImg.layer = 3;
+            resourceImg.transform.SetParent(current.transform);
+
+            Vector3 localPosition = new Vector3( positionx + offsetX, offsetY, 1);
+
+            // Set the position relative to the tile
+            resourceImg.transform.localPosition = localPosition;
+            positionx += 0.2f;
+            count += 1;
+            if(count > 5 ){
+                count = 0;
+                positionx = 0;
+                offsetY = 0.2f;
+            }
+        }
+
     }
 
     // Method to remove a resource from the tile
-    public void RemoveResource(ResourcesGame resourceToRemove)
+    public void RemoveResource(ResourcesGame resourceToRemove, GameObject crr)
     {
         // Remove the specified resource from the resources list
         resources.Remove(resourceToRemove);
+        MakeResourcesImages(crr);
     }
 
     // Method to get the name of the land and a list of resources on the tile as a formatted string

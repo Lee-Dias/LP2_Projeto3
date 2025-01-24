@@ -220,8 +220,14 @@ public class Units : MonoBehaviour
             // Find the tile information for the new position
             TileInfo targetTileInfo = FindTileInfoAt(newPos);
 
+            bool hasunit = false;
+            foreach (Transform child in destination.transform)
+            {
+                if(child.gameObject.layer == 0)
+                    hasunit = true;  
+            }
             // Check if the tile is valid and unoccupied
-            if (targetTileInfo != null && destination.hasChild == false)
+            if (targetTileInfo != null && hasunit == false)
             {
                 // Calculate the distance from the new position to the destination
                 float newDistance = Vector3.Distance(newPos, destPos);
