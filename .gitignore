@@ -67,9 +67,6 @@ crashlytics-build.properties
 **/[Aa]ssets/[Ss]treamingAssets/aa.meta
 **/[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# TextMesh Pro files
-**/[Aa]ssets/TextMesh*Pro*
-
 # Unity meshes and materials
 Assets/Models
 Assets/Materials
