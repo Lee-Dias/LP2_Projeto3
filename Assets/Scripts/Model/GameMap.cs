@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using NUnit.Framework.Constraints;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameMap : MonoBehaviour
@@ -18,10 +16,10 @@ public class GameMap : MonoBehaviour
     public int mapYSize{get; private set;}
     // List to store all resource types available in the game
     [SerializeField]
-    private List<ResourcesGame> allResources;
+    private List<ResourceGame> allResources;
     // List to store all land types available in the game
     [SerializeField]
-    private List<Lands> allLands;
+    private List<Land> allLands;
     // Reference to the GameObject that will act as the parent container for all tiles
     [SerializeField]
     private GameObject tilesParent;
@@ -86,7 +84,7 @@ public class GameMap : MonoBehaviour
                 }
 
                 // Loop through all land types to see if the part matches any land name code
-                foreach (Lands land in allLands)
+                foreach (Land land in allLands)
                 {
                     // Check if the current part matches the land's name code
                     if (parts[k] == land.LandNameCode)
@@ -95,7 +93,9 @@ public class GameMap : MonoBehaviour
                         gotSomething = true;
 
                         // Instantiate the land object at the correct position (x, y)
-                        GameObject tileObject = Instantiate(land.LandObject, new Vector3(x, y, 0), Quaternion.identity);
+                        GameObject tileObject = Instantiate
+                        (land.LandObject, new Vector3(x, y, 0),
+                        Quaternion.identity);
 
                         // Set the parent of the tile to organize them in the scene hierarchy
                         tileObject.transform.SetParent(tilesParent.transform);
@@ -105,8 +105,8 @@ public class GameMap : MonoBehaviour
                         // Initialize the tile with the corresponding land type
                         tileScript.Initialize(land);
                         // Set the tile's coordinates (x, y) for later reference
-                        tileScript.x = x;
-                        tileScript.y = y;
+
+                        tileScript.Changexy(x,y);
 
                         // Optionally, set the name of the tile based on its position for easy debugging
                         tileObject.name = $"{land.LandName} ({x}, {y})";
@@ -125,7 +125,7 @@ public class GameMap : MonoBehaviour
                 }
 
                 // Loop through all resources to see if the part matches any resource code
-                foreach (ResourcesGame resources in allResources)
+                foreach (ResourceGame resources in allResources)
                 {
                     // Check if the current part matches the resource's name code
                     if (parts[k] == resources.ResourceNameCode)

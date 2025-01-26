@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "ResourcesGame", menuName = "Scriptable Objects/ResourcesGame")]
-public class ResourcesGame : ScriptableObject
+[CreateAssetMenu(fileName = "ResourceGame",
+ menuName = "Scriptable Objects/ResourceGame")]
+public class ResourceGame : ScriptableObject
 {
     // Name of the resource
     [SerializeField]

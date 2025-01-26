@@ -8,14 +8,14 @@ public class UiManager : MonoBehaviour
     // Variable to Set what turn it is
     private int gameTurn = 1;
 
-    // Creates and empty list of ResourcesGame 
-    private List<ResourcesGame> allResourcesGame = new List<ResourcesGame> ();
+    // Creates and empty list of ResourceGame 
+    private List<ResourceGame> allResourceGame = new List<ResourceGame> ();
     // Gets the text that shows the turn
     [SerializeField]
     private TextMeshProUGUI turn;
-    // Gets the text that shows all ResourcesGame
+    // Gets the text that shows all ResourceGame
     [SerializeField]
-    private TextMeshProUGUI showResourcesGame;
+    private TextMeshProUGUI showResourceGame;
     // Gets the parent of all tiles
     [SerializeField]
     private GameObject parentOfTiles;
@@ -28,9 +28,9 @@ public class UiManager : MonoBehaviour
     // Gets the UnitsSelected
     [SerializeField]
     private GameObject unitsSelected;
-    // Gets all unique ResourcesGame
+    // Gets all unique ResourceGame
     [SerializeField]
-    private List<ResourcesGame> allUniqueResourcesGame;
+    private List<ResourceGame> allUniqueResourceGame;
 
     // Update method called every frame to update the UI with game information
     private void Update()
@@ -41,8 +41,8 @@ public class UiManager : MonoBehaviour
         UnitInfoSlected();
         // Update selected units info
         UnitsSelected();
-        // Check and display all ResourcesGame available in the game
-        checkAllResourcesGameToGet();
+        // Check and display all ResourceGame available in the game
+        CheckAllResourceGameToGet();
     }
 
     // Method to increase the game turn by 1 when called
@@ -57,77 +57,77 @@ public class UiManager : MonoBehaviour
         // If exactly one unit is selected
         if (unitSelectManager.selectedUnits.Count == 1)
         {
-            // Show the unit's name and ResourcesGame it can harvest
-            Selected.text = "Unit: " + unitSelectManager.selectedUnits.First().unitToPlay.UnitName + "\n" + " Total ResourcesGame Harvested: " + "\n";
-            // Loop through the ResourcesGame that the selected unit can harvest
-            foreach (ResourcesGame resource in unitSelectManager.selectedUnits.First().unitToPlay.ResourcesToHarvest)
+            // Show the unit's name and ResourceGame it can harvest
+            Selected.text = "Unit: " + unitSelectManager.selectedUnits.First().unitToPlay.UnitName + "\n" + " Total ResourceGame Harvested: " + "\n";
+            // Loop through the ResourceGame that the selected unit can harvest
+            foreach (ResourceGame resource in unitSelectManager.selectedUnits.First().unitToPlay.ResourcesToHarvest)
             {
                 // Add the resource name to the display
                 Selected.text += resource.ResourceName;            
                 // Count how many times the resource was harvested by the selected unit
                 int i = 0;
-                foreach (ResourcesGame ResourcesGame in unitSelectManager.selectedUnits.First().ResourcesGameHarvested)
+                foreach (ResourceGame ResourceGame in unitSelectManager.selectedUnits.First().ResourceGameHarvested)
                 {
                     i += 1; // Increase count for each harvested resource
                 }
-                // Display the number of ResourcesGame harvested
+                // Display the number of ResourceGame harvested
                 Selected.text += ": " + i + "\n";
             }
         }
         else
         {
-            // If more than one unit is selected, display a summary of all selected units and ResourcesGame harvested
-            Selected.text = "Units Selected: " + unitSelectManager.selectedUnits.Count() + "\n" + " Total ResourcesGame Harvested: " + "\n";       
-            // Loop through all unique ResourcesGame and calculate how many times each one has been harvested
-            foreach (ResourcesGame ResourcesGame in allUniqueResourcesGame)
+            // If more than one unit is selected, display a summary of all selected units and ResourceGame harvested
+            Selected.text = "Units Selected: " + unitSelectManager.selectedUnits.Count() + "\n" + " Total ResourceGame Harvested: " + "\n";       
+            // Loop through all unique ResourceGame and calculate how many times each one has been harvested
+            foreach (ResourceGame ResourceGame in allUniqueResourceGame)
             {
                 int i = 0;
                 foreach (Units unit in unitSelectManager.selectedUnits)
                 {
                     // Count how many times each resource is harvested by any of the selected units
-                    foreach (ResourcesGame resource in unit.ResourcesGameHarvested)
+                    foreach (ResourceGame resource in unit.ResourceGameHarvested)
                     {
                         i += 1; // Increase count for each harvested resource
                     }
                 }
                 // Display the resource count for each resource
-                Selected.text += ResourcesGame.ResourceName + " x" + i + "\n";
+                Selected.text += ResourceGame.ResourceName + " x" + i + "\n";
             }
         }
     }
 
-    // Method to check and display the total number of ResourcesGame available in the game
-    private void checkAllResourcesGameToGet()
+    // Method to check and display the total number of ResourceGame available in the game
+    private void CheckAllResourceGameToGet()
     {
-        // Display the header for the ResourcesGame
-        showResourcesGame.text = "Total ResourcesGame: \n";
-        // Initialize a list to store all the ResourcesGame in the game
-        allResourcesGame = new List<ResourcesGame>();
-        // Loop through all tiles and collect ResourcesGame from them
+        // Display the header for the ResourceGame
+        showResourceGame.text = "Total ResourceGame: \n";
+        // Initialize a list to store all the ResourceGame in the game
+        allResourceGame = new List<ResourceGame>();
+        // Loop through all tiles and collect ResourceGame from them
         foreach (Transform child in parentOfTiles.transform)
         {
             TileInfo tilecode = child.GetComponent<TileInfo>();
-            // Add each resource in the tile to the allResourcesGame list
-            foreach (ResourcesGame resource in tilecode.GetResources())
+            // Add each resource in the tile to the allResourceGame list
+            foreach (ResourceGame resource in tilecode.GetResources())
             {
-                allResourcesGame.Add(resource);
+                allResourceGame.Add(resource);
             }
         }
         // Loop through each unique resource and count how many times it appears in the game
-        foreach (ResourcesGame resource in allUniqueResourcesGame)
+        foreach (ResourceGame resource in allUniqueResourceGame)
         {
             int i = 0;
-            // Count how many times the resource is present in allResourcesGame
-            foreach (ResourcesGame ResourcesGame in allResourcesGame)
+            // Count how many times the resource is present in allResourceGame
+            foreach (ResourceGame ResourceGame in allResourceGame)
             {
-                if (resource == ResourcesGame)
+                if (resource == ResourceGame)
                 {
                     // Increase count if the resource matches
                     i += 1; 
                 }
             }
             // Display the count of each unique resource
-            showResourcesGame.text = showResourcesGame.text + resource.ResourceName + " x" + i + "\n";
+            showResourceGame.text = showResourceGame.text + resource.ResourceName + " x" + i + "\n";
         }
     }
 

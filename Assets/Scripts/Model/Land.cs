@@ -1,8 +1,8 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Lands", menuName = "Scriptable Objects/Lands")]
-public class Lands : ScriptableObject
+[CreateAssetMenu(fileName = "Land", menuName = "Scriptable Objects/Land")]
+public class Land : ScriptableObject
 {
     // Name of the land type 
     [SerializeField]

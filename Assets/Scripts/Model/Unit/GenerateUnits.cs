@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class GenerateUnits : MonoBehaviour
@@ -35,12 +34,15 @@ public class GenerateUnits : MonoBehaviour
                     {
                         // Instantiate the unit's object at a specified position
                         GameObject Unitobject;
-                        Unitobject = Instantiate(unit.UnitImage, new Vector3(0.3f, 0.2f, 0.7f), Quaternion.identity);
+                        Unitobject = Instantiate(unit.UnitImage, 
+                        new Vector3(0.3f, 0.2f, 0.7f), Quaternion.identity);
                         
-                        // Set the parent of the unit to the selected tile's transform
+                        // Set the parent of the unit ~
+                        //to the selected tile's transform
                         Unitobject.transform.SetParent(child.transform, false);
                         
-                        // Disable further iteration (unit is placed successfully)
+                        // Disable further iteration 
+                        //(unit is placed successfully)
                         isRunning = false;
 
                         // Get the Units component of the instantiated unit
@@ -51,7 +53,8 @@ public class GenerateUnits : MonoBehaviour
                 }
             }
 
-            // Exit the loop after one full iteration (as isRunning is set to false)
+            // Exit the loop after one full iteration 
+            //(as isRunning is set to false)
             isRunning = false;
         }
     }

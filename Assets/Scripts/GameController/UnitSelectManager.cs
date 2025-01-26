@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -8,10 +7,6 @@ public class UnitSelectManager : MonoBehaviour
     
     // List to store the currently selected units. 
     public List<Units> selectedUnits {get; private set;} = new List<Units>();
-
-    // Reference to the TilesChecker script, used to check tile status 
-    [SerializeField]
-    private TIlesChecker tilesChecker;  
     // Reference to the TileSelectManager, used to manage the selected tile in the game
     [SerializeField]
     private TileSelectManager tileSelected;  
@@ -62,8 +57,6 @@ public class UnitSelectManager : MonoBehaviour
                 unit.MoveUnit(tile);  
                 // Trigger any additional movement logic for the unit
                 unit.EachMove();  
-                // Update the tiles' state after movement
-                tilesChecker.checkchilds();  
             }
         }
         else

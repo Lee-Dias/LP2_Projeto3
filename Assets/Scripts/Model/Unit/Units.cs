@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
 using System.Collections;
-using Unity.VisualScripting;
-using NUnit.Framework;
 
 public class Units : MonoBehaviour
 {
@@ -11,10 +8,11 @@ public class Units : MonoBehaviour
     public Unit unitToPlay;
     //Variable for currenttile that the unit is in
     private TileInfo currentTile;
-    //Variable for the ResourcesGame in the tile that the unit is in
-    private List<ResourcesGame> ResourcesGameInTile;
-    //Variable for the ResourcesGame that the unit has harvested
-    public List<ResourcesGame> ResourcesGameHarvested {get; private set;} = new List<ResourcesGame>();
+    //Variable for the ResourceGame in the tile that the unit is in
+    private List<ResourceGame> ResourceGameInTile;
+    //Variable for the ResourceGame that the unit has harvested
+    public List<ResourceGame> ResourceGameHarvested 
+    {get; private set;} = new List<ResourceGame>();
     //Variable for the UnitSelectManager
     private UnitSelectManager unitSelectManager;
     // For visual feedback on the blink
@@ -42,8 +40,8 @@ public class Units : MonoBehaviour
     public void EachMove(){
         //gets the parent of the object
         currentTile = this.GetComponentInParent<TileInfo>();
-        //gets the ResourcesGame of the parent
-        ResourcesGameInTile = currentTile.GetResources();
+        //gets the ResourceGame of the parent
+        ResourceGameInTile = currentTile.GetResources();
     }
     //checks if the player left clicks the mouse
     private void OnMouseDown()
@@ -84,46 +82,53 @@ public class Units : MonoBehaviour
         }
     }
 
-    // Method for the unit to harvest ResourcesGame
+    // Method for the unit to harvest ResourceGame
     public void UnitHarvest()
     {
-        // Check if there are ResourcesGame in the current tile
-        if (ResourcesGameInTile != null)
+        // Check if there are ResourceGame in the current tile
+        if (ResourceGameInTile != null)
         {
-            // Creates a list to store ResourcesGame that need to be removed after harvesting
-            List<ResourcesGame> ResourcesGameToRemove = new List<ResourcesGame>();
+            // Creates a list to store ResourceGame 
+            //that need to be removed after harvesting
+            List<ResourceGame> ResourceGameToRemove = new List<ResourceGame>();
 
             // Loops through each resource in the tile
-            foreach (ResourcesGame resource in ResourcesGameInTile)
+            foreach (ResourceGame resource in ResourceGameInTile)
             {
                 // Loops through each resource the unit is capable of harvesting
-                foreach (ResourcesGame resourceHarvest in unitToPlay.ResourcesToHarvest)
+                foreach 
+                (ResourceGame resourceHarvest in unitToPlay.ResourcesToHarvest)
                 {
-                    // Check if the resource matches the unit's harvestable ResourcesGame
+                    // Check if the resource matches 
+                    //the unit's harvestable ResourceGame
                     if (resource == resourceHarvest)
                     {
-                        // Add the resource to the removal list to process it later
-                        ResourcesGameToRemove.Add(resourceHarvest);
+                        // Add the resource to the 
+                        //removal list to process it later
+                        ResourceGameToRemove.Add(resourceHarvest);
 
-                        // Add the resource to the list of harvested ResourcesGame
-                        ResourcesGameHarvested.Add(resourceHarvest);
+                        // Add the resource to the 
+                        //list of harvested ResourceGame
+                        ResourceGameHarvested.Add(resourceHarvest);
                     }
                 }
             }
 
-            // Check if the unit is allowed to add ResourcesGame to the tile
+            // Check if the unit is allowed to add ResourceGame to the tile
             if (unitToPlay.CanAddResources == true)
             {
-                // Loop through the ResourcesGame the unit is capable of generating
-                foreach (ResourcesGame resource in unitToPlay.ResourcesToGenerate)
+                // Loop through the ResourceGame 
+                //the unit is capable of generating
+                foreach 
+                (ResourceGame resource in unitToPlay.ResourcesToGenerate)
                 {
                     // Add the generated resource to the current tile
                     currentTile.AddResources(resource);
                 }
             }
 
-            // Process the ResourcesGame that need to be removed after harvesting
-            foreach (ResourcesGame resourceToRemove in ResourcesGameToRemove)
+            // Process the ResourceGame that need to be removed after harvesting
+            foreach (ResourceGame resourceToRemove in ResourceGameToRemove)
             {
                 // Remove the resource from the current tile
                 currentTile.RemoveResources(resourceToRemove);
@@ -131,7 +136,8 @@ public class Units : MonoBehaviour
         }
         else
         {
-            // Log a message if there are no ResourcesGame to harvest in the current tile
+            // Log a message if there are no ResourceGame
+            // to harvest in the current tile
             Debug.Log("nothing to harvest here");
         }
     }
@@ -172,7 +178,8 @@ public class Units : MonoBehaviour
                 new Vector3(1, 0, 0)   
             });
         }
-        // Check if the unit has Moore movement (cardinal and diagonal directions)
+        // Check if the unit has Moore movement 
+        //(cardinal and diagonal directions)
         else if (unitToPlay.Movement == Unit.move.Moore)
         {
             // Add cardinal and diagonal movement directions to the list
@@ -238,17 +245,22 @@ public class Units : MonoBehaviour
                     transform.SetParent(targetTileInfo.transform, false);
 
                     // Update the unit's world position for visual feedback
-                    transform.position = new Vector3(newPos.x + 0.3f, newPos.y + 0.3f, 0.7f);
+                    transform.position = new Vector3
+                    (newPos.x + 0.3f, newPos.y + 0.3f, 0.7f);
 
                     // Log the new position of the unit
-                    Debug.Log($"{unitToPlay.UnitName} moved to ({newPos.x}, {newPos.y}).");
+                    Debug.Log
+                    ($"{unitToPlay.UnitName} moved to"
+                    + "({newPos.x}, {newPos.y}).");
                     return;
                 }
             }
         }
 
         // Log a message if the unit couldn't move and stayed in place
-        Debug.Log($"{unitToPlay.UnitName} couldn't move and stayed at ({currentPos.x}, {currentPos.y}).");
+        Debug.Log
+        ($"{unitToPlay.UnitName} couldn't move and stayed at"
+        + "({currentPos.x}, {currentPos.y}).");
     }
 
     private TileInfo FindTileInfoAt(Vector3 position)
@@ -308,7 +320,8 @@ public class Units : MonoBehaviour
             {
                 //sees how fast should the t go to 1
                 t += Time.deltaTime * blinkSpeed;
-                unitRenderer.material.color = Color.Lerp(originalColor, Color.white, t);
+                unitRenderer.material.color = Color.Lerp
+                (originalColor, Color.white, t);
                 yield return null;
             }
 
@@ -318,7 +331,8 @@ public class Units : MonoBehaviour
             {
                 //sees how fast should the t go to 1
                 t += Time.deltaTime * blinkSpeed;
-                unitRenderer.material.color = Color.Lerp(Color.white, originalColor, t);
+                unitRenderer.material.color = Color.Lerp
+                (Color.white, originalColor, t);
                 yield return null;
             }
         }

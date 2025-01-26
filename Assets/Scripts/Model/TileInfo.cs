@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using TMPro;
 
 public class TileInfo : MonoBehaviour
 {
     private Tile tile; // The logical data for this tile
 
     //tiles x
-    public int x;
+    public int x{get; private set;}
     //tiles y
-    public int y;  
+    public int y{get; private set;} 
 
     //checks if tile has child
     public bool hasChild{get; private set;} = false;
@@ -24,7 +22,7 @@ public class TileInfo : MonoBehaviour
 
 
     // Method to initialize the tile with a specified land type
-    public void Initialize(Lands land)
+    public void Initialize(Land land)
     {
         // Create the Tile object using the provided land
         tile = new Tile(land);
@@ -35,7 +33,7 @@ public class TileInfo : MonoBehaviour
     }
 
     // Method to check if the tile has any child objects (e.g., a unit or other objects)
-    public void checkChild()
+    public void CheckChild()
     {
         // If the tile has one or more child objects, set the hasChild flag to true
         if (this.transform.childCount > 0)
@@ -50,7 +48,7 @@ public class TileInfo : MonoBehaviour
     }
 
     // Method to retrieve the list of resources present on the tile
-    public List<ResourcesGame> GetResources()
+    public List<ResourceGame> GetResources()
     {
         // Return the list of resources stored in the tile object
         return tile.resources;
@@ -58,14 +56,14 @@ public class TileInfo : MonoBehaviour
  
 
     // Method to add resources to the tile
-    public void AddResources(ResourcesGame resources)
+    public void AddResources(ResourceGame resources)
     {
         // Call the AddResource method on the tile to add the specified resource
         tile.AddResource(resources, this.gameObject);
     }
 
     // Method to remove resources from the tile
-    public void RemoveResources(ResourcesGame resources)
+    public void RemoveResources(ResourceGame resources)
     {
         // Call the RemoveResource method on the tile to remove the resource
         tile.RemoveResource(resources, this.gameObject);
@@ -120,6 +118,11 @@ public class TileInfo : MonoBehaviour
         isBlinking = true;
         // Start the blinking effect coroutine to make the unit blink
         StartCoroutine(BlinkEffect());
+    }
+
+    public void Changexy(int a, int b){
+        x = a;
+        y = b;
     }
 
     // Method to handle the unit deselection, stopping the blinking effect

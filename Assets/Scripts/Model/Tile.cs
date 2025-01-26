@@ -1,21 +1,19 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Tile
 {
-    private Lands land; 
+    private Land land; 
     // List to store resources present on the tile
-    public List<ResourcesGame> resources { get; private set; } 
+    public List<ResourceGame> resources { get; private set; } 
 
     // Constructor to initialize the Tile with a specific land type
-    public Tile(Lands land)
+    public Tile(Land land)
     {
         // Set the land type for this tile
         this.land = land; 
         // Initialize the list of resources as empty
-        this.resources = new List<ResourcesGame>(); 
+        this.resources = new List<ResourceGame>(); 
     }
 
     // Method to calculate the total number of coins available on the tile
@@ -47,11 +45,11 @@ public class Tile
     }
 
     // Method to add a resource to the tile if it is not already present
-    public void AddResource(ResourcesGame resourceToAdd, GameObject crr)
+    public void AddResource(ResourceGame resourceToAdd, GameObject crr)
     { 
         // Check if the resource is already present in the list
         // Check if the resource is already present in the resources list
-        foreach (ResourcesGame resource in resources)
+        foreach (ResourceGame resource in resources)
         {
             if (resourceToAdd == resource)
             {
@@ -77,14 +75,17 @@ public class Tile
         float offsetY = -0.35f; // Vertical offset
         float positionx = 0;
         int count = 0;
-        foreach (ResourcesGame resource in resources)
+        foreach (ResourceGame resource in resources)
         {
             // Instantiate the resource's GameObject
-            GameObject resourceImg = UnityEngine.Object.Instantiate(resource.Img, new Vector3(0, 0, 0.51f), Quaternion.identity);
+            GameObject resourceImg = UnityEngine.Object.Instantiate
+            (resource.Img, new Vector3(0, 0, 0.51f), Quaternion.identity);
+
             resourceImg.layer = 3;
             resourceImg.transform.SetParent(current.transform);
 
-            Vector3 localPosition = new Vector3( positionx + offsetX, offsetY, 1);
+            Vector3 localPosition = new Vector3
+            (positionx + offsetX, offsetY, 1);
 
             // Set the position relative to the tile
             resourceImg.transform.localPosition = localPosition;
@@ -100,7 +101,7 @@ public class Tile
     }
 
     // Method to remove a resource from the tile
-    public void RemoveResource(ResourcesGame resourceToRemove, GameObject crr)
+    public void RemoveResource(ResourceGame resourceToRemove, GameObject crr)
     {
         // Remove the specified resource from the resources list
         resources.Remove(resourceToRemove);
