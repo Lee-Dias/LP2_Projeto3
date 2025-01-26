@@ -16,6 +16,10 @@ Lee Dias, a22405765;
 |29/12|Lee Dias|Acabou o UI e validações faltando apenas uma melhor organização|
 |29/12|Lee Dias|Codigo melhor organizado e commentado necisstando apenas do markdown|
 |29/12|Lee Dias|Completou o markdown|
+|24/01|Lee Dias|fez os resources aparecerem no ecra|
+|26/01|Lee Dias|atualizou o projeto e o codigo consoante o feedback do professor(80 linhas, using inuteis, publics inuteis)|
+|26/01|Lee Dias|atualizou o relatorio|
+
 
 
 ## [>Repositório Git<](https://github.com/Lee-Dias/LP2_Projeto3)
@@ -24,15 +28,27 @@ Lee Dias, a22405765;
 
 ### Descrição
 
-Começou se por refazer a logica toda do projeto 1 e para isso começou se por criar um 
-scriptable object para lands e um script que gera o mapa consoante um ficheiro,
-.map4x que verifica o tamanho se existe a land que é pretendida e gera em, 
-posições diferentes a cada um, em seguida fez se as units tambem com scriptable object,
-e criou se um script units para as units, em seguida fez se as units serem geradas dentro do jogo,
+Antes de começar o projeto pensou se logo em como ia se implementar e quais 
+patterns seriam os melhores a serem implementados e percebeu-se que o 
+flyweight pattern seria algo bastante bom para este projeto então implementou-se 
+scriptable objects para coisas que se repetiam tal como recursos,lands e units.
+
+Começou se por refazer a logica toda do projeto 1, para isso começou se por criar um 
+scriptable object para lands e um script que gera o mapa consoante um ficheiro
+.map4x, que verifica o tamanho se existe a land que é pretendida e gera em, 
+posições diferentes a cada um. 
+
+Em seguida fez se as units, e criou se um script unit para as units,
+em seguida fez se as units serem geradas dentro do jogo,
 e depois completou se o script de units para elas moverem ou darem harvest com isso houve a adição do 
-script de unitselectmanager para se saber quais units estão selecionadas depois de disso,
-notou se que era algo que melhorava o codigo por isso tambem se adicionou o script tileSelectManager,
+script de unitselectmanager para se saber quais units estão selecionadas depois disso,
+tambem se adicionou o script tileSelectManager para ficar mais coerente,
 por fim completou-se o UI todo juntamente com a camera do jogo.
+
+A nivel de MVC o projeto foi feito de forma que quando nos necessitavamos de uma classe,
+antes de a criarmos viamos aonde é que ela entrava dentro do MVC,
+e tentava se fazer com que realmente fizesse sentido aquela classe para aquela parte do MVC,
+então evitava-se logo coisas como alterar textos numa classe de modelo. 
 
 A nivel de principio SOLID acerdito que estejam todos, o maior cuidado foi na parte de tentar fazer ao maximo com que 
 as classes nunca precissasem ser alteradas caso fosse adicionada um tile ou um unit novo para isso foi criado scriptable objects
@@ -59,7 +75,6 @@ classDiagram
     Units <|-- TileInfo
     Units <|-- Resources
     Unit --> Resources
-    TIlesChecker --> TileInfo
     GenerateUnits --> Units
     GenerateUnits --> TileInfo
     UiManager --> UnitSelectManager
@@ -69,75 +84,29 @@ classDiagram
     UiManager --> GameMap
 
     class Start {
-        +StartGame()
-        +OpenExplorer()
     }
     class GameMap {
-        +GenerateMap(mapInfo)
-        +GameStart(mapPath)
     }
     class TileInfo {
-        +Initialize(Lands land)
-        +AddResources(Resources resources)
-        +RemoveResources(Resources resources)
-        +GetTotalCoins()
-        +GetTotalFood()
-        +GetTileNameAndResources()
-        +checkChild()
     }
     class Tile {
-        +CalculateCoins()
-        +CalculateFood()
-        +AddResource(Resources resourceToAdd)
-        +RemoveResource(Resources resourceToRemove)
     }
     class Resources {
-        +coinModifier()
-        +foodModifier()
     }
     class Lands {
     }
     class UnitSelectManager {
-        +SelectUnit(Units unit)
-        +DeselectUnit(Units unit)
-        +MoveAllUnits()
-        +DeselectAllUnits()
-        +RemoveAllUnits()
-        +HarvestSelectedUnits()
-        +GetSelectedUnits()
     }
     class TileSelectManager {
-        +SelectTile(TileInfo tile)
-        +DeselectTile()
     }
     class Units {
-        +OnSelected()
-        +OnDeselected()
-        +MoveUnit(TileInfo tile)
-        +UnitRemoveSelf()
-        +UnitHarvest()
     }
     class Unit {
-        +ResourcesToHarvest
-        +ResourcesToGenerate
-        +UnitImage
-        +Movement
     }
     class CameraController {
-        +HandleZoom()
-        +HandleRightClickDrag()
-        +CameraPosition()
-    }
-    class TIlesChecker {
-        +checkchilds()
     }
     class GenerateUnits {
-        +PlaceUnit(Unit unit)
     }
     class UiManager {
-        +Play()
-        +UnitInfoSlected()
-        +checkAllResourcesToGet()
-        +UnitsSelected()
     }
 
