@@ -2,6 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// this class handles everything the unit can do such as 
+/// checks if it is selected, harvests if it is selected, moves and changes its
+/// parent in case it moves, and holds the units info.
+/// </summary>
 public class Units : MonoBehaviour
 {
     //Variable for unit to know if he is a miner, butcher etc...
@@ -228,7 +233,7 @@ public class Units : MonoBehaviour
             TileInfo targetTileInfo = FindTileInfoAt(newPos);
 
             bool hasunit = false;
-            foreach (Transform child in destination.transform)
+            foreach (Transform child in targetTileInfo.transform)
             {
                 if(child.gameObject.layer == 0)
                     hasunit = true;  

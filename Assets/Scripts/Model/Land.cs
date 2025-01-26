@@ -1,6 +1,9 @@
 using UnityEngine;
 
-
+/// <summary>
+/// this class handles each Land info as its name, coin value, food value, and 
+/// its game object(appearance).
+/// </summary>
 [CreateAssetMenu(fileName = "Land", menuName = "Scriptable Objects/Land")]
 public class Land : ScriptableObject
 {

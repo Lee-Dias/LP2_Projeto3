@@ -1,5 +1,8 @@
 using UnityEngine;
-
+/// <summary>
+/// when the player generates a unit this classe sees what unit it recieves 
+/// and generates a unit randomly on the map in a open tile.
+/// </summary>
 public class GenerateUnits : MonoBehaviour
 {
     [SerializeField]

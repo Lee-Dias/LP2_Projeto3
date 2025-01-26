@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
-
+/// <summary>
+/// this class generates the map from the .map4x  and in case there is something
+/// that isnt intended to be handled it says that it is unkown.
+/// </summary>
 public class GameMap : MonoBehaviour
 {
     // Array to store all the map data loaded from a file

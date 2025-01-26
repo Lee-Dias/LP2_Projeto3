@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEditor;
-
+/// <summary>
+/// When the game starts it will request a .map4x file and this classe
+/// handles that and makes sure that it is recieving a .map4x file and if it 
+/// doesnt recieve a .map4x it doesnt accept it.
+/// </summary>
 public class Start : MonoBehaviour
 {
     // Property to hold the file path selected by the user
@@ -29,7 +33,8 @@ public class Start : MonoBehaviour
             {
                 // Hide the current game object after a valid file is selected
                 this.gameObject.SetActive(false);
-                // Call the GameStart method from GameMap and pass the selected file path
+                // Call the GameStart method from GameMap and pass the 
+                //selected file path
                 gameMapFile.GameStart(Map4xPath);
                 cameraScript.CameraPosition();
 
@@ -37,7 +42,8 @@ public class Start : MonoBehaviour
             else
             {
                 // Handle if the selected file isn't a .map4x file
-                Debug.LogError("Invalid file type selected. Only .map4x files are allowed.");
+                Debug.LogError
+                ("Invalid file type selected. Only .map4x files are allowed.");
                 // Tell the user to select a valid file
                 Debug.Log("Please select a valid .map4x file.");
             }

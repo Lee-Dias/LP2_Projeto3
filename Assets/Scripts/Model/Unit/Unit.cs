@@ -2,7 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-
+/// <summary>
+/// this class handles each unit info as name the resources it can harvest
+/// and the resources he can generate and its type of movement and its
+/// gameobject(appearance)
+/// </summary>
 [CreateAssetMenu(fileName = "Unit", menuName = "Scriptable Objects/Unit")]
 public class Unit : ScriptableObject
 {

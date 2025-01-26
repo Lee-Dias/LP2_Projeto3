@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// used to control the tile and use the Tile.cs and 
+/// does the select verification 
+/// </summary>
 public class TileInfo : MonoBehaviour
 {
     private Tile tile; // The logical data for this tile
@@ -32,20 +35,6 @@ public class TileInfo : MonoBehaviour
         originalColor = unitRenderer.material.color;
     }
 
-    // Method to check if the tile has any child objects (e.g., a unit or other objects)
-    public void CheckChild()
-    {
-        // If the tile has one or more child objects, set the hasChild flag to true
-        if (this.transform.childCount > 0)
-        {
-            hasChild = true;
-        }
-        else
-        {
-            // Otherwise, set the hasChild flag to false
-            hasChild = false;
-        }
-    }
 
     // Method to retrieve the list of resources present on the tile
     public List<ResourceGame> GetResources()

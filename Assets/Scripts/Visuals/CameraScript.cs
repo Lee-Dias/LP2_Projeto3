@@ -1,5 +1,9 @@
 using UnityEngine;
-
+/// <summary>
+/// This class handles the camera as its movement, zoom and its position to be 
+/// centred on the map,
+/// and what the initial size will be depending on the size of the map
+/// </summary>
 public class CameraScript : MonoBehaviour
 {
 // Reference to the game map for positioning the camera

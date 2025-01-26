@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// this class handles each resource info as the name, the amount of coins it 
+/// haves, the amount of food it haves and the image of the resource.
+/// </summary>
 [CreateAssetMenu(fileName = "ResourceGame",
  menuName = "Scriptable Objects/ResourceGame")]
 public class ResourceGame : ScriptableObject

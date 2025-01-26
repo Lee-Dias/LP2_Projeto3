@@ -2,7 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-
+/// <summary>
+/// Handles all the UI in the game getting
+/// all the information that the player needs and showing it to him
+/// </summary>
 public class UiManager : MonoBehaviour
 {
     // Variable to Set what turn it is
@@ -31,10 +34,21 @@ public class UiManager : MonoBehaviour
     // Gets all unique ResourceGame
     [SerializeField]
     private List<ResourceGame> allUniqueResourceGame;
+    [SerializeField]
+    private TileSelectManager TileManager;
+    [SerializeField]
+    // Displays information like coin and food counts for the selected tile
+    private TextMeshProUGUI tileTextInfo; 
 
+    private TileInfo selectedTile;
+
+    void Start (){
+        
+    }
     // Update method called every frame to update the UI with game information
     private void Update()
     {
+        selectedTile = TileManager.GetSelectedUnit();
         // Display the current turn number
         turn.text = "turn: " + gameTurn;
         // Update selected unit info
@@ -43,6 +57,15 @@ public class UiManager : MonoBehaviour
         UnitsSelected();
         // Check and display all ResourceGame available in the game
         CheckAllResourceGameToGet();
+        // Update the tile information text on the UI 
+        //with the selected tiles details
+        if (selectedTile != null){
+            tileTextInfo.text = selectedTile.GetTileNameAndResources() +
+            " coins: " + selectedTile.GetTotalCoins() 
+            + " Food: " + selectedTile.GetTotalFood();
+        }else{
+            tileTextInfo.text = "No selected tile";
+        }
     }
 
     // Method to increase the game turn by 1 when called

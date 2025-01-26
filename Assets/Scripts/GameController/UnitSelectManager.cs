@@ -1,13 +1,19 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+/// <summary>
+/// This classe handles the selected unit 
+/// sets a unit as selected and deselects a unit if it is clicked again and 
+/// deselects a tile if another tile is selected or selects another unit if 
+/// the player is clicking ctrl.
+/// </summary>
 public class UnitSelectManager : MonoBehaviour
 {
     
     // List to store the currently selected units. 
     public List<Units> selectedUnits {get; private set;} = new List<Units>();
-    // Reference to the TileSelectManager, used to manage the selected tile in the game
+    // Reference to the TileSelectManager,
+    // used to manage the selected tile in the game
     [SerializeField]
     private TileSelectManager tileSelected;  
 

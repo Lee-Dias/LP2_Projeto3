@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// the class handles what each tile has and can have as checks its amount of 
+/// coins and food including the resources and and add resources and remove them 
+/// also can get the tiles name and all resources it has.
+/// </summary>
 public class Tile
 {
     private Land land; 
