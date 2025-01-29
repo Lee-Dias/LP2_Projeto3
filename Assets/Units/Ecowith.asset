@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4ef370ab11b424385e22ae1f0f9385, type: 3}
+  m_Name: Ecowith
+  m_EditorClassIdentifier: 
+  unitName: Ecowith
+  unitNameCode: Ecowith
+  resourcesToHarvest: []
+  canAddResources: 1
+  resourcesToGenerate:
+  - {fileID: 11400000, guid: def2ddd16335d8c49aae09b3208d3058, type: 2}
+  movement: 0
+  unitImage: {fileID: 4423684556880446552, guid: 66142b7fe08ab69479c6953c935b84f5, type: 3}
